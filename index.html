@@ -9,42 +9,88 @@
     
       gtag('config', 'G-X34RB45W15');
     </script>
+    <style>
+        body { background-color: #f4f4f4; font-family: 'Courier New', Courier, monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; color: #1a1a1a; }
+        .container { border: 4px solid #1a1a1a; padding: 40px; background: white; box-shadow: 10px 10px 0px #000; max-width: 90%; }
+        h2 { letter-spacing: 5px; font-size: 1.2rem; margin-bottom: 0; }
+        #status { font-size: 8rem; font-weight: 900; margin: 10px 0; }
+        .timestamp { color: #666; font-size: 0.8rem; margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        
+        /* Buttons */
+        .btn { display: inline-block; padding: 12px 24px; margin: 10px 5px; border: 2px solid #000; text-decoration: none; font-weight: bold; color: white; cursor: pointer; transition: 0.2s; }
+        .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0px #000; }
+        .btn-bmc { background: #FFDD00; color: #000; } /* Buy Me a Coffee */
+        .btn-x { background: #000; }
+        .btn-fb { background: #1877F2; }
+        .btn-wa { background: #25D366; }
+        .btn-li { background: #0077b5; }
+        .btn-re { background: #FF4500; }
+
+        .share-label { margin-top: 30px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+        .disclaimer { margin-top: 40px; font-size: 0.7rem; color: #999; max-width: 300px; }
+    </style>
     <title>IS HORMUZ OPEN TODAY ?</title>
   </head>  
 
   <body>
-    
+
+    <div class="container">
+      <h2>IS HORMUZ OPEN?</h2>
+      <div id="status">---</div>
+      <div class="timestamp" id="timestamp">INITIALIZING INTEL...</div>
   
-    <div style="text-align: center; margin-top: 20vh; font-family: 'Helvetica', sans-serif;">
-      <p style="font-size: 1.2rem; letter-spacing: 3px; color: #666; font-weight: bold;">IS HORMUZ OPEN TODAY ?</p>
-      <h1 id="status" style="font-size: 8rem; font-weight: 900; margin: 20px 0; line-height: 1;">---</h1>
-      <p id="timestamp" style="font-size: 1rem; color: #999; margin-bottom: 40px;"></p>
-      
-      <hr style="width: 50px; border: 1px solid #eee; margin: 40px auto;">
-    
       <div style="margin-top: 30px;">
-        Our current minesweeper is held together by duct tape. Help us buy a real one.
+        DONATE TO THE MINESWEEPER FUND
         <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="tabman83" data-color="#FFDD00" data-emoji="🛳️"  data-font="Comic" data-text="buy me a sonar" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>        
       </div>
-
-      
-      <p style="font-size: 0.8rem; color: #ccc; margin-top: 60px; max-width: 400px; margin-left: auto; margin-right: auto;">
-        DISCLAIMER: Transit status is determined by proprietary algorithmic coin-toss. Not for navigational use.
-      </p>
-    </div>
-    
-    <script>
-      const statusEl = document.getElementById("status");
-      const outcomes = ["YES", "NO"];
-      const colors = ["#1a1a1a", "#d00000"]; // Black for Open, Serious Red for Closed
-      
+  
+      <div class="share-label">🚨 Alert the Markets:</div>
+      <div id="share-buttons">
+          <a href="#" onclick="share('x')" class="btn btn-x">X</a>
+          <a href="#" onclick="share('fb')" class="btn btn-fb">FB</a>
+          <a href="#" onclick="share('wa')" class="btn btn-wa">WhatsApp</a>
+          <a href="#" onclick="share('li')" class="btn btn-li">LinkedIn</a>
+          <a href="#" onclick="share('re')" class="btn btn-re">Reddit</a>
+      </div>
+  
+      <div class="disclaimer">
+          DISCLAIMER: Transit status is determined by proprietary algorithmic coin-toss. Not for navigational use.
+      </div>
+  </div>
+  
+  <script>
+      // 1. Logic for Randomness
+      const outcomes = ["OPEN", "CLOSED"];
+      const colors = ["#1a1a1a", "#d00000"];
       const roll = Math.floor(Math.random() * outcomes.length);
-      statusEl.innerText = outcomes[roll];
+      const result = outcomes[roll];
+  
+      const statusEl = document.getElementById("status");
+      statusEl.innerText = result;
       statusEl.style.color = colors[roll];
-    
-      // Set fake "Live" timestamp
+  
+      // 2. Set Fake Timestamp
       const now = new Date();
-      document.getElementById("timestamp").innerText = "INTEL VERIFIED: " + now.toLocaleTimeString();
-    </script>
+      document.getElementById("timestamp").innerText = "INTEL VERIFIED: " + now.toLocaleTimeString() + " (UTC)";
+  
+      // 3. Social Sharing Logic
+      function share(platform) {
+          const url = encodeURIComponent("https://ishormuzclosed.today");
+          const msg = encodeURIComponent(`🚨 BREAKING: The Strait of Hormuz is officially ${result}. Transitioning all assets to canned goods and gold. Check status: `);
+          
+          let shareUrl = "";
+          switch(platform) {
+              case 'x': shareUrl = `https://x.com/intent/post?text=${msg}&url=${url}`; break;
+              case 'fb': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; break;
+              case 'wa': shareUrl = `https://api.whatsapp.com/send?text=${msg}${url}`; break;
+              case 'li': shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`; break;
+              case 're': shareUrl = `https://www.reddit.com/submit?url=${url}&title=${msg}`; break;
+          }
+          window.open(shareUrl, '_blank');
+      }
+  </script>
+
+
+
   </body>
 </html>
